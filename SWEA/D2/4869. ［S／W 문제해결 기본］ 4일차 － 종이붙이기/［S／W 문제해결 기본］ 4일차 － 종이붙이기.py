@@ -1,3 +1,5 @@
+# 피보나치 활용
+"""
 import math
 
 T = int(input())
@@ -13,3 +15,23 @@ for tc in range(1, T+1):
         cnt += (math.factorial(N // 10 - i) // (math.factorial(i) * math.factorial(N // 10 - i*2))) * (2 ** i)
 
     print(f'#{tc} {cnt}')
+ """
+    
+ # DP 점화식으로 접근
+T = int(input())
+for tc in range(1, T+1):
+    N = int(input()) // 10
+
+    # 공간 생성
+    dp = [0] * (N + 1)
+
+    # 10 X n 크기의 직사각형을 채우는 방법의 수
+    dp[1] = 1
+    dp[2] = 3
+
+    for i in range(3, N + 1):
+        dp[i] = dp[i-1] + 2*dp[i-2]
+
+    print(f'#{tc} {dp[N]}')
+
+    
