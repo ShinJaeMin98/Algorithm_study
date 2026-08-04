@@ -13,6 +13,7 @@ def append_to_queue(ny, nx, k, time, visited, q):
 def solution(maps):
   n, m = len(maps), len(maps[0])
   visited = [[[False for _ in range(2)] for _ in range(m)] for _ in range(n)]
+  
   # ➌ 위, 아래, 왼쪽, 오른쪽 이동 방향
   dy = [-1, 1, 0, 0]
   dx = [0, 0, -1, 1]
