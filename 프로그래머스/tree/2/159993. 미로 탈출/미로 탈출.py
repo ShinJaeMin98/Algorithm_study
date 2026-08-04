@@ -45,6 +45,7 @@ def solution(maps):
       # ➑ 다음 이동 지점이 물인 경우
       if maps[ny][nx] == "L":
         append_to_queue(ny, nx, 1, time, visited, q)
+        
       # ➒ 다음 이동 지점이 물이 아닌 경우
       else:
         append_to_queue(ny, nx, k, time, visited, q)
