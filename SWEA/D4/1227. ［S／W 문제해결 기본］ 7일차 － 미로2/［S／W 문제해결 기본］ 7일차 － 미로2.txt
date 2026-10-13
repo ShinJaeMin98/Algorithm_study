@@ -1,0 +1,57 @@
+from collections import deque
+
+# 상하좌우: x는 행, y는 열
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+
+def bfs(graph, start_x, start_y):
+    visited = [[0] * 100 for _ in range(100)]
+    q = deque()
+
+    # TODO 1: 시작 좌표를 큐에 넣고 방문 처리
+    q.append((start_x, start_y))
+    visited[start_x][start_y] = 1
+
+    while q:
+        x, y = q.popleft()
+
+        # TODO 2: 현재 칸이 도착점(3)이면 1 반환
+        if graph[x][y] == 3:
+            return 1
+
+        for d in range(4):
+            nx = x + dx[d]
+            ny = y + dy[d]
+
+            # TODO 3: 배열 범위를 벗어나면 continue
+            if not (0 <= nx < 100 and 0<= ny < 100):
+                continue
+
+            # TODO 4: 벽(1)이거나 이미 방문했다면 continue
+            if graph[nx][ny] == 1 or visited[nx][ny] == 1:
+                continue
+
+            # TODO 5: 다음 칸을 방문 처리하고 큐에 넣기
+            visited[nx][ny] = 1
+            q.append((nx, ny))
+
+    # 탐색이 끝나도 도착점을 찾지 못함
+    return 0
+
+
+for _ in range(10):
+    tc = int(input())
+    graph = [list(map(int, input().strip())) for _ in range(100)]
+
+    start_x, start_y = -1, -1
+
+    # TODO 6: 이중 for문으로 값이 2인 출발점 좌표 찾기
+    for i in range(100):
+        for j in range(100):
+            if graph[i][j] == 2:
+                start_x, start_y = i, j
+                break
+
+    answer = bfs(graph, start_x, start_y)
+    print(f"#{tc} {answer}")
